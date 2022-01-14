@@ -1,0 +1,12 @@
+Video demo of similar app at UC Berkeley https://www.youtube.com/watch?v=YR0kPLoJ08I
+
+Key functionality:
+    - Add course
+    - Add break
+    - Select course
+    - Select break
+    - Generate schedules
+    - View schedule
+    - Lock class
+    - Save class schedule
+    - Compare schedules
