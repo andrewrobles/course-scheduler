@@ -7,7 +7,7 @@ from api.service.serializers import UserSerializer, GroupSerializer
 
 from .models import Schedule
 
-@api_view(['POST'])
+@api_view(['GET', 'POST'])
 def schedule(request):
     if request.method == 'POST':
         Schedule.objects.create(
