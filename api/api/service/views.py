@@ -1,8 +1,20 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets
 from rest_framework import permissions
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from api.service.serializers import UserSerializer, GroupSerializer
 
+from .models import Schedule
+
+@api_view(['POST'])
+def schedule(request):
+    if request.method == 'POST':
+        Schedule.objects.create(
+            name=request.data['name']
+        )
+
+    return Response()
 
 class UserViewSet(viewsets.ModelViewSet):
     """
