@@ -14,7 +14,13 @@ def schedule(request):
             name=request.data['name']
         )
 
-    return Response()
+    response_body = []
+    for current_schedule in Schedule.objects.all():
+        response_body.append({
+            'name': current_schedule.name
+        })
+
+    return Response(response_body)
 
 class UserViewSet(viewsets.ModelViewSet):
     """

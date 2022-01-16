@@ -8,17 +8,26 @@ class ScheduleTestCase(TestCase):
         self.factory = APIClient()
 
     def test_add_schedule(self):
-        request_body = {
-            'name': 'Default schedule'
-        }
 
-        # Make API call for adding a schedule
-        response = self.factory.post('/schedules/', request_body, format='json')
+        # Make multiple API calls for adding a schedule
+        response = self.factory.post('/schedules/', {'name': 'Default schedule'}, format='json')
+        response = self.factory.post('/schedules/', {'name': 'Schedule #1'}, format='json')
+        response = self.factory.post('/schedules/', {'name': 'Schedule #2'}, format='json')
 
         # Check that a schedule was created
-        schedule_count = Schedule.objects.all().count()
-        self.assertEqual(schedule_count, 1)
+        schedules = Schedule.objects.all()
+        self.assertEqual(schedules.count(), 3)
 
-        # Check contents of the schedule
-        schedule = Schedule.objects.first()
-        self.assertEqual(schedule.name, request_body['name'])
+        # Check contents of the schedules
+        self.assertEqual(schedules[0].name, 'Default schedule')
+        self.assertEqual(schedules[1].name, 'Schedule #1')
+        self.assertEqual(schedules[2].name, 'Schedule #2')
+
+        # Check contents of the response body
+        expected_response_body = [
+            {'name': 'Default schedule'},
+            {'name': 'Schedule #1'},
+            {'name': 'Schedule #2'}
+        ]
+        
+        self.assertEqual(response.data, expected_response_body)
