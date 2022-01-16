@@ -1,14 +1,18 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCaretDown } from '@fortawesome/free-solid-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { Menu, Transition } from '@headlessui/react'
 import { Fragment } from 'react'
-import { ChevronDownIcon } from '@heroicons/react/solid'
+import { ChevronDownIcon} from '@heroicons/react/solid'
+import 'react-popper-tooltip/dist/styles.css';
 
-export default function Home() {
+export default function Home() {  
   return (
     <div>
       <div className="m-3"> 
           <Dropdown />
+          <div className="ml-2 mt-0.5 text-xl">
+            <FontAwesomeIcon icon={faPlus} className="create-schedule text-gray-700 fa-sm hover:bg-gray-200 rounded-sm p-0.5"/>
+          </div>      
       </div>
     </div>
   )
