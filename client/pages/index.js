@@ -1,9 +1,7 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus } from '@fortawesome/free-solid-svg-icons'
-
 import { useState, useEffect} from 'react'
 
 import Dropdown from '../components/dropdown'
+import AddButton from '../components/addButton'
 
 export default function Home() {  
   const [state, setState] = useState({
@@ -33,10 +31,8 @@ export default function Home() {
   return (
     <div>
       <div className="m-3"> 
-          <Dropdown options={scheduleNames}/>
-          <div className="ml-2 mt-0.5 text-xl">
-            <FontAwesomeIcon icon={faPlus} className="create-schedule text-gray-700 fa-sm hover:bg-gray-200 rounded-sm p-0.5"/>
-          </div>      
+          <Dropdown options={scheduleNames} saveSchedules={saveSchedules}/>
+          <AddButton numSchedules={state.schedules.length} saveSchedules={saveSchedules}/>    
       </div>
     </div>
   )

@@ -45,6 +45,3 @@ class ScheduleTestCase(TestCase):
         ]
 
         self.assertEqual(expected_response_body, actual_response_body)
-
-
-        

@@ -1,14 +1,17 @@
 import { Menu, Transition } from '@headlessui/react'
-import { Fragment } from 'react'
+import { useEffect, Fragment } from 'react'
 import { ChevronDownIcon} from '@heroicons/react/solid'
 
 export default function Dropdown(props) {
+    const reversedOptions = [...props.options]
+    reversedOptions.reverse()
+
     return (
       <Menu as="div" className="relative inline-block text-left">
         <div>
-          <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
+          <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 w-44">
             <div className="ml-0.5">
-              Default schedule
+              {reversedOptions[0]}
             </div>
             <ChevronDownIcon className="-mr-1 ml-1 h-5 w-5" aria-hidden="true" />
           </Menu.Button>
@@ -25,7 +28,7 @@ export default function Dropdown(props) {
         >
           <Menu.Items className="origin-top-right absolute right-0 mt-2 w-40 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none">
             <div className="py-1">
-                { props.options.map(element => <Option label={element}/>) }
+                { reversedOptions.map(element => <Option label={element}/>) }
             </div>
           </Menu.Items>
         </Transition>
