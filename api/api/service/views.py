@@ -5,6 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from api.service.serializers import UserSerializer, GroupSerializer
 
+from django.shortcuts import get_object_or_404
 from .models import Schedule
 
 @api_view(['GET', 'POST'])
@@ -16,6 +17,17 @@ def schedule(request):
         Schedule.objects.create(
             name=request.data['name']
         )
+
+    response_body = []
+    for current_schedule in Schedule.objects.all():
+        response_body.append({'name': current_schedule.name})
+
+    return Response(response_body)
+
+@api_view(['DELETE'])
+def delete_schedule(request, pk):
+    schedule = get_object_or_404(Schedule, pk=pk)
+    schedule.delete()
 
     response_body = []
     for current_schedule in Schedule.objects.all():
