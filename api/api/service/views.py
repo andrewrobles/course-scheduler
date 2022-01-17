@@ -9,6 +9,9 @@ from .models import Schedule
 
 @api_view(['GET', 'POST'])
 def schedule(request):
+    if Schedule.objects.count() == 0:
+        Schedule.objects.create(name='Default schedule')
+
     if request.method == 'POST':
         Schedule.objects.create(
             name=request.data['name']
@@ -16,9 +19,7 @@ def schedule(request):
 
     response_body = []
     for current_schedule in Schedule.objects.all():
-        response_body.append({
-            'name': current_schedule.name
-        })
+        response_body.append({'name': current_schedule.name})
 
     return Response(response_body)
 

@@ -15,7 +15,7 @@ export default function AddButton(props) {
         .then(data => props.saveSchedules(data))
     }
 
-    return  <div className="ml-2 mt-0.5 text-xl" onClick={addSchedule}>
-        <FontAwesomeIcon icon={faPlus} id="select-schedule" className="text-gray-700 fa-sm hover:bg-gray-200 rounded-sm p-0.5"/>
+    return  <div className="ml-2 mt-0.5 text-xl" >
+        <FontAwesomeIcon onClick={addSchedule} icon={faPlus} id="select-schedule" className="text-gray-700 fa-sm hover:bg-gray-200 rounded-sm p-0.5"/>
     </div>  
 }

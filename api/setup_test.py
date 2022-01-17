@@ -11,6 +11,6 @@ from api.service.models import Schedule
 for schedule in Schedule.objects.all():
     schedule.delete()
 
-# Add schedules to the database
-for current_name in ['Default schedule', 'Schedule #2', 'Schedule #3']:
-    Schedule.objects.create(name=current_name)
+# # Add schedules to the database
+# for current_name in ['Default schedule', 'Schedule #2', 'Schedule #3']:
+#     Schedule.objects.create(name=current_name)
