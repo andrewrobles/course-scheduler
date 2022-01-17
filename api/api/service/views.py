@@ -18,22 +18,33 @@ def schedule(request):
             name=request.data['name']
         )
 
-    response_body = []
-    for current_schedule in Schedule.objects.all():
-        response_body.append({'name': current_schedule.name})
+    # Return all schedules in the response
+    response_body = get_schedules()
 
     return Response(response_body)
 
 @api_view(['DELETE'])
 def delete_schedule(request, pk):
-    schedule = get_object_or_404(Schedule, pk=pk)
-    schedule.delete()
+    # Delete if more than one schedule exists
+    if Schedule.objects.count() > 1:
+        schedule = get_object_or_404(Schedule, pk=pk)
+        schedule.delete()
 
-    response_body = []
-    for current_schedule in Schedule.objects.all():
-        response_body.append({'name': current_schedule.name})
+    # Return all the schedules in the response
+    response_body = get_schedules()
 
     return Response(response_body)
+
+def get_schedules():
+    schedules = []
+    for current_schedule in Schedule.objects.all():
+        schedules.append({
+            'name': current_schedule.name,
+            'id': current_schedule.id
+        })
+
+    return schedules
+
 
 class UserViewSet(viewsets.ModelViewSet):
     """
