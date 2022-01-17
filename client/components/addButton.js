@@ -16,6 +16,6 @@ export default function AddButton(props) {
     }
 
     return  <div className="ml-2 mt-0.5 text-xl" >
-        <FontAwesomeIcon onClick={addSchedule} icon={faPlus} id="select-schedule" className="text-gray-700 fa-sm hover:bg-gray-200 rounded-sm p-0.5"/>
+        <FontAwesomeIcon onClick={addSchedule} icon={faPlus} id="create-schedule" className="text-gray-700 fa-sm hover:bg-gray-200 rounded-sm p-0.5"/>
     </div>  
 }

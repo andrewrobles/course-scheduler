@@ -26,12 +26,16 @@ export default function Home() {
     }
   }
 
-  const scheduleNames = state.schedules.map(element => element.name)
-  
+  const scheduleNames = state.schedules.map(element => element.name)  
+
   return (
     <div>
       <div className="m-3"> 
-          <Dropdown options={scheduleNames} saveSchedules={saveSchedules}/>
+          <Dropdown 
+            options={scheduleNames} 
+            saveSchedules={saveSchedules} 
+            schedules={state.schedules}
+          />
           <AddButton numSchedules={state.schedules.length} saveSchedules={saveSchedules}/>    
       </div>
     </div>
