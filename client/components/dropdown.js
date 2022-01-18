@@ -1,5 +1,5 @@
 import { Menu, Transition } from '@headlessui/react'
-import { useEffect, Fragment } from 'react'
+import { Fragment } from 'react'
 import { ChevronDownIcon} from '@heroicons/react/solid'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,12 +7,13 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons'
 
 
 export default function Dropdown(props) {
+
     return (
       <Menu as="div" id="select-schedule" className="relative inline-block text-left">
         <div>
           <Menu.Button className="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-1.5 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 w-44">
             <div className="ml-0.5">
-              <SelectedScheduleName schedules={props.schedules}/>
+              { getSelectedScheduleName(props.schedules, props.selectedScheduleIndex) }
             </div>
             <ChevronDownIcon className="-mr-1 ml-1 h-5 w-5" aria-hidden="true" />
           </Menu.Button>
@@ -32,21 +33,13 @@ export default function Dropdown(props) {
               <ScheduleOptions 
                 schedules={props.schedules}
                 saveSchedules={props.saveSchedules}
+                selectSchedule={props.selectSchedule}
               />
             </div>
           </Menu.Items>
         </Transition>
       </Menu>
     )
-  }
-
-  function SelectedScheduleName(props) {
-    const lastIndex = props.schedules.length - 1
-    if (props.schedules[lastIndex] == undefined) {
-      return ""
-    } else {
-      return props.schedules[lastIndex].name
-    }
   }
 
   function ScheduleOptions(props) {
@@ -58,9 +51,17 @@ export default function Dropdown(props) {
       reversedSchedules.reverse()
 
       const showDeleteButton = props.schedules.length > 1
-      console.log(showDeleteButton)
 
-      return reversedSchedules.map(element => <Option label={element.name} id={element.id} saveSchedules={props.saveSchedules} showDeleteButton={showDeleteButton}/>)
+      return reversedSchedules.map((element, elementIndex) => 
+        <Option 
+          numSchedules={props.schedules.length}
+          saveSchedules={props.saveSchedules} 
+          showDeleteButton={showDeleteButton}
+          selectSchedule={props.selectSchedule}
+          scheduleIndex={elementIndex}
+          label={element.name} 
+          id={element.id} 
+        />)
     }
   }
 
@@ -77,6 +78,11 @@ export default function Dropdown(props) {
         .then(data => props.saveSchedules(data))
       }
 
+      const onScheduleClick = () => {
+        props.selectSchedule(props.numSchedules - props.scheduleIndex - 1)
+      }
+
+
       return <Menu.Item>
       {({ active }) => (
         <a
@@ -85,6 +91,7 @@ export default function Dropdown(props) {
             active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
             'block w-full text-left px-4 py-2 text-sm'
           )}
+          onClick={onScheduleClick}
         >
           {props.label}
           {props.showDeleteButton ? <FontAwesomeIcon onClick={deleteSchedule} id="delete-schedule" className="float-right" icon={faTimes}/> : null}
@@ -95,4 +102,13 @@ export default function Dropdown(props) {
 
   function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
+  }
+
+  function getSelectedScheduleName(schedules, selectedScheduleIndex) {
+
+    if (schedules[selectedScheduleIndex]== undefined) {
+      return ""
+    } else {
+      return schedules[selectedScheduleIndex].name
+    }
   }
