@@ -25,10 +25,23 @@ def schedule(request):
 
 @api_view(['DELETE'])
 def delete_schedule(request, pk):
-    # Delete if more than one schedule exists
-    if Schedule.objects.count() > 1:
+    # Delete only if more than one schedule exists
+    if Schedule.objects.count() > 1 and schedule_exists(pk):
         schedule = get_object_or_404(Schedule, pk=pk)
         schedule.delete()
+
+    # Return all the schedules in the response
+    response_body = get_schedules()
+
+    return Response(response_body)
+
+@api_view(['PUT'])
+def edit_schedule(request, pk):
+    
+    if schedule_exists(pk):
+        schedule = Schedule.objects.get(pk=pk)
+        schedule.name=request.data['name']
+        schedule.save()
 
     # Return all the schedules in the response
     response_body = get_schedules()
@@ -44,6 +57,9 @@ def get_schedules():
         })
 
     return schedules
+
+def schedule_exists(pk):
+    return Schedule.objects.filter(pk=pk).exists()
 
 
 class UserViewSet(viewsets.ModelViewSet):

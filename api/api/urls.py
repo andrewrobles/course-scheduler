@@ -12,5 +12,6 @@ urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     path('schedules/', views.schedule, name='schedules'),
-    path('schedules/<int:pk>/delete/', views.delete_schedule, name='delete-schedule')
+    path('schedules/<int:pk>/delete/', views.delete_schedule, name='delete-schedule'),
+    path('schedules/<int:pk>/edit/', views.edit_schedule, name='edit-schedule')
 ]
