@@ -2,6 +2,7 @@ import { useState, useEffect} from 'react'
 
 import Dropdown from '../components/dropdown'
 import AddButton from '../components/addButton'
+import DuplicateButton from '../components/duplicateButton'
 
 export default function Home() {  
   const [state, setState] = useState({
@@ -36,6 +37,19 @@ export default function Home() {
     })
   }
 
+  const duplicateSchedule = () => {
+    const selectedScheduleName = getSelectedScheduleName(state.schedules, state.selectedScheduleIndex)
+    fetch('http://localhost:8000/schedules/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({'name': selectedScheduleName + ' (Copy)'})
+    })
+    .then(response => response.json())
+    .then(data => saveSchedules(data))
+  }
+
   return (
     <div>
       <div className="m-3"> 
@@ -45,8 +59,24 @@ export default function Home() {
             selectedScheduleIndex={state.selectedScheduleIndex}
             selectSchedule={selectSchedule}
           />
-          <AddButton numSchedules={state.schedules.length} saveSchedules={saveSchedules}/>    
+          <div className='flow-root'>
+            <div className='float-left'>
+              <AddButton numSchedules={state.schedules.length} saveSchedules={saveSchedules}/> 
+            </div>
+            <div className='float-left'>
+              <DuplicateButton duplicateSchedule={duplicateSchedule} />   
+            </div>
+          </div>
       </div>
     </div>
   )
+}
+
+function getSelectedScheduleName(schedules, selectedScheduleIndex) {
+
+  if (schedules[selectedScheduleIndex]== undefined) {
+    return ""
+  } else {
+    return schedules[selectedScheduleIndex].name
+  }
 }
