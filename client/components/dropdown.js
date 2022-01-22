@@ -67,7 +67,7 @@ export default function Dropdown(props) {
 
   function Option(props) {
       const deleteSchedule = () => {
-        const url = 'http://localhost:8000/schedules/' + props.id.toString() + '/delete/'
+        const url = 'https://andrewrobles.pythonanywhere.com/schedules/' + props.id.toString() + '/delete/'
         fetch(url, {
           method: 'DELETE',
           headers: {

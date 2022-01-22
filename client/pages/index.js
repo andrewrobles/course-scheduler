@@ -16,7 +16,7 @@ export default function Home() {
   }, [])
 
   const getSchedules = () => {
-    fetch('http://localhost:8000/schedules/')
+    fetch('https://andrewrobles.pythonanywhere.com/schedules/')
     .then(response => response.json())
     .then(data => saveSchedules(data))
   }
@@ -39,7 +39,7 @@ export default function Home() {
 
   const duplicateSchedule = () => {
     const selectedScheduleName = getSelectedScheduleName(state.schedules, state.selectedScheduleIndex)
-    fetch('http://localhost:8000/schedules/', {
+    fetch('https://andrewrobles.pythonanywhere.com/schedules/', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
