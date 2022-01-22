@@ -53,16 +53,18 @@ export default function Dropdown(props) {
       const showDeleteButton = props.schedules.length > 1
 
       return reversedSchedules.map((element, elementIndex) => 
-        <Option 
-          key={elementIndex}
-          numSchedules={props.schedules.length}
-          saveSchedules={props.saveSchedules} 
-          showDeleteButton={showDeleteButton}
-          selectSchedule={props.selectSchedule}
-          scheduleIndex={elementIndex}
-          label={element.name} 
-          id={element.id} 
-        />)
+        <span key={elementIndex}>
+          <Option 
+            numSchedules={props.schedules.length}
+            saveSchedules={props.saveSchedules} 
+            showDeleteButton={showDeleteButton}
+            selectSchedule={props.selectSchedule}
+            scheduleIndex={elementIndex}
+            label={element.name} 
+            id={element.id} 
+          />
+        </span>
+        )
     }
   }
 
