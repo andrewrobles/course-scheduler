@@ -13,6 +13,9 @@ export default function Home() {
     fetch('http://localhost:8000/helloworld/')
     .then(response => response.json())
     .then(data => saveMessage(data.message))
+    .catch( err => {
+        saveMessage('Connection error')
+    })
   }
 
   const saveMessage = (message) => {
