@@ -10,7 +10,7 @@ export default function Home() {
   }, [])
 
   const getMessage = () => {
-    fetch('http://localhost:8000/helloworld/')
+    fetch('https://andrewrobles.pythonanywhere.com/helloworld/')
     .then(response => response.json())
     .then(data => saveMessage(data.message))
     .catch( err => {
