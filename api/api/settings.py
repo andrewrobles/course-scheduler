@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-9aq1cp9m!0)^l%y62i7+n8llpnc_m#^x5=3=3pelcs#a2*7z24
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['andrewrobles.pythonanywhere.com']
+ALLOWED_HOSTS = ['andrewrobles.pythonanywhere.com', 'zippy-three.vercel.app']
 
 
 # Application definition
@@ -139,8 +139,10 @@ CORS_ALLOW_ALL_ORIGINS = True # If this is used then `CORS_ALLOWED_ORIGINS` will
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
+    'https://zippy-three.vercel.app'
 ]
 
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',
+    'https://zippy-three.vercel.app'
 )

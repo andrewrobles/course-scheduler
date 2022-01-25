@@ -5,3 +5,4 @@ venv/
 rest_framework/
 admin/
 static
+*.swp
