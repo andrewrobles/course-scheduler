@@ -3,6 +3,16 @@ from rest_framework.test import APIClient
 
 from .models import Schedule
 
+class HelloWorldTestCase(TestCase):
+    def setUp(self):
+        self.factory = APIClient()
+
+    def test_get_hello_world(self):
+        actual = self.factory.get('/helloworld/', format='json').data
+        expected = {'message': 'Hello World!'}
+
+        self.assertEqual(actual, expected)
+
 class ScheduleTestCase(TestCase):
     def setUp(self):
         self.factory = APIClient()

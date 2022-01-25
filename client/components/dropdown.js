@@ -53,21 +53,24 @@ export default function Dropdown(props) {
       const showDeleteButton = props.schedules.length > 1
 
       return reversedSchedules.map((element, elementIndex) => 
-        <Option 
-          numSchedules={props.schedules.length}
-          saveSchedules={props.saveSchedules} 
-          showDeleteButton={showDeleteButton}
-          selectSchedule={props.selectSchedule}
-          scheduleIndex={elementIndex}
-          label={element.name} 
-          id={element.id} 
-        />)
+        <span key={elementIndex}>
+          <Option 
+            numSchedules={props.schedules.length}
+            saveSchedules={props.saveSchedules} 
+            showDeleteButton={showDeleteButton}
+            selectSchedule={props.selectSchedule}
+            scheduleIndex={elementIndex}
+            label={element.name} 
+            id={element.id} 
+          />
+        </span>
+        )
     }
   }
 
   function Option(props) {
       const deleteSchedule = () => {
-        const url = 'http://localhost:8000/schedules/' + props.id.toString() + '/delete/'
+        const url = 'https://andrewrobles.pythonanywhere.com/schedules/' + props.id.toString() + '/delete/'
         fetch(url, {
           method: 'DELETE',
           headers: {

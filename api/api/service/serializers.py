@@ -14,9 +14,3 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Group
         fields = ['url', 'name']
-
-
-class ScheduleSerializer(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = Schedule
-        fields = ['name']

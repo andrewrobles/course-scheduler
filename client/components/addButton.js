@@ -4,7 +4,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 export default function AddButton(props) {
     const addSchedule = () => {
-        fetch('http://localhost:8000/schedules/', {
+        fetch('https://andrewrobles.pythonanywhere.com/schedules/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
